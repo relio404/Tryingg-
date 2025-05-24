@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Relio | ريليو</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0f0f0f;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      color: #ffd700;
+    }
+
+    textarea {
+      width: 90%;
+      height: 400px;
+      background: #1e1e1e;
+      color: #00ff88;
+      border: none;
+      padding: 15px;
+      font-size: 14px;
+      direction: ltr;
+      resize: none;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #00ff88;
+      color: black;
+      border: none;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #00cc66;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Relio | ريليو</h1>
+
+  <textarea id="code" readonly>
+local player = game.Players.LocalPlayer
+local char = player.Character or player.CharacterAdded:Wait()
+local gui = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))
+gui.Name = "CatapultGUI"
+gui.ResetOnSpawn = false
+local btn = Instance.new("TextButton", gui)
+btn.Size = UDim2.new(0, 50, 0, 50)
+btn.Position = UDim2.new(0.9, 0, 0.1, 0)
+btn.BackgroundColor3 = Color3.fromRGB(255, 200, 0)
+btn.Text = "🧨"
+btn.TextScaled = true
+btn.TextColor3 = Color3.new(0, 0, 0)
+btn.Draggable = true
+btn.Name = "LaunchBtn"
+btn.MouseButton1Click:Connect(function()
+    local char = player.Character
+    if not char then return end
+    local hrp = char:FindFirstChild("HumanoidRootPart")
+    if not hrp then return end
+    local dir = workspace.CurrentCamera.CFrame.LookVector
+    hrp.Velocity = dir * 200 + Vector3.new(0, 100, 0)
+end)
+  </textarea>
+
+  <button onclick="copyCode()">نسخ السكربت</button>
+
+  <script>
+    function copyCode() {
+      const code = document.getElementById("code");
+      code.select();
+      code.setSelectionRange(0, 99999); // للهواتف
+      document.execCommand("copy");
+      alert("تم نسخ السكربت!");
+    }
+  </script>
+
+</body>
+</html>
